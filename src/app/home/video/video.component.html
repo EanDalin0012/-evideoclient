@@ -13,18 +13,31 @@
                   <span class="last-seen">Online</span>
               </div>
           </div>
-          <ul class="nav float-right custom-menu">
+          <!-- <ul class="nav float-right custom-menu">
               <li class="nav-item">
                   <a href="#task_window" id="task_chat" class="task-chat profile-rightbar float-right"><i class="fa fa-comments"></i></a>
               </li>
 
+          </ul> -->
+
+          <ul class="nav float-right custom-menu">
+            <li class="nav-item">
+              <a href="#task_window" id="task_chat" class="task-chat profile-rightbar float-right"><i class="fa fa-comments"></i></a>
+            </li>
+            <li class="nav-item dropdown dropdown-action">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-cog"></i></a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a href="javascript:void(0)" class="dropdown-item">Settings</a>
+              </div>
+            </li>
           </ul>
+
       </div>
   </div>
   <div class="chat-contents">
       <div class="chat-content-wrap col-md-12" style="margin-top: 15px;">
           <div class="user-video" style="position: relative;width: 90%;margin: 0 auto;">
-            <video [src]="src"  height="200" controls></video>
+            <video type="video/mp4" [src]="src"  height="200" controls controlsList="nodownload" (ended)="videoEnd()"></video>
               <!-- <img [src]="src" alt="" style="height: 400px;width: 100%;"> -->
           </div>
 
@@ -39,44 +52,40 @@
 
                   <div class="chats">
 
-                    <!-- <h4>Hospital Administration Phase 1</h4> -->
+                  <div class="file-pro-list">
+                    <div class="file-scroll">
+                      <div class="roles-menu">
+                        <ul>
+                          <ng-container *ngFor="let item of vdParts">
+                            <li [ngClass]="{'active': item.part === vdPartId}" (click)="changePlayVD(item)">
+                              <a href="javascript:void(0);" style="padding: 0px;">
+                                <div class="navbar">
+                                  <div class="user-details">
+                                      <div class="float-left user-img">
+                                          <a class="avatar"  title="Mike Litorus" style="padding: 0px;border-left: none;">
+                                              <img src="https://1.bp.blogspot.com/-fjll9rjSaLk/YVAvYOTwNVI/AAAAAAAACxk/22IqgsYrY5IFYcG3F57NCnsu6ltCY5H5gCLcBGAsYHQ/w222-h230-p-k-no-nu/Lung-Sne-Chong-Pov-Bosaba.png" alt="" class="rounded-circle">
+                                              <span class="status online"></span>
+                                          </a>
+                                      </div>
+                                      <div class="user-info float-left">
+                                          <a style="padding: 0px;border-left: none;"><span>Mike Litorus</span></a>
+                                          <span class="last-seen">19-02-2021: 12:50</span>
+                                      </div>
+                                      <span class="part"> {{item.part}} part</span>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                          </ng-container>
 
-                    <!-- <div class="task-header">
-                      <div class="assignee-info">
-                        <a href="#" data-toggle="modal" data-target="#assignee">
-                          <div class="avatar">
-                            <img alt="" src="assets/img/profiles/avatar-02.jpg">
-                          </div>
-                          <div class="assigned-info">
-                            <div class="task-head-title">Assigned To</div>
-                            <div class="task-assignee">John Doe</div>
-                          </div>
-                        </a>
-                        <span class="remove-icon">
-                          <i class="fa fa-close"></i>
-                        </span>
+                        </ul>
                       </div>
+                    </div>
+                  </div>
 
-                      <div class="task-due-date">
-                        <a href="#" data-toggle="modal" data-target="#assignee">
-                          <div class="due-icon">
-                            <span>
-                              <i class="material-icons">date_range</i>
-                            </span>
-                          </div>
-                          <div class="due-info">
-                            <div class="task-head-title">Due Date</div>
-                            <div class="due-date">Mar 26, 2019</div>
-                          </div>
-                        </a>
-                        <span class="remove-icon">
-                          <i class="fa fa-close"></i>
-                        </span>
-                      </div>
+                    <!-- <ng-container *ngFor="let item of vdParts">
 
-                    </div> -->
 
-                    <ng-container *ngFor="let item of vdParts">
                       <a href="javascript:void(0);">
                       <div class="navbar">
                         <div class="user-details">
@@ -95,7 +104,7 @@
                       </div>
                     </a>
                     <hr class="task-line" style="margin: 0.5rem;">
-                    </ng-container>
+                    </ng-container> -->
 
                     <div class="task-information">
                       <span class="task-info-line">

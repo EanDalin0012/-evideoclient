@@ -6,9 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./video.component.css']
 })
 export class VideoComponent implements OnInit {
-  src = 'http://localhost:8080/api/read/vd/v0';
+  src = 'http://localhost:8080/unsecur/api/read/vd/v0/0';
   vdTitle = '';
   vdParts: any[] = [];
+
+  vdPartId = 0;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -22,6 +25,15 @@ export class VideoComponent implements OnInit {
       );
 
     }
+    this.vdPartId = this.vdParts[0].part;
   }
 
+  videoEnd() {
+    this.src = 'http://localhost:8080/unsecur/api/read/vd/v0/5';
+  }
+
+  changePlayVD(item:any) {
+    console.log(item);
+    this.vdPartId = item.part;
+  }
 }
