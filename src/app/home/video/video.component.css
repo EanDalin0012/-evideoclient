@@ -17,3 +17,7 @@ body {
   min-width: 1px;
   margin-left: 50px;
 }
+
+.chats {
+  padding: 15px 15px;
+}

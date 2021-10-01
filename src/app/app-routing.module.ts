@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { VLayoutComponent } from './layout/v-layout/v-layout.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/main', pathMatch: 'full'},
+  {path: '', redirectTo: '/main/home', pathMatch: 'full'},
   // {
   //   path: 'login', component: LayoutBlankComponent, loadChildren: () => import('./authorization/authorization.module').then(m => m.AuthorizationModule)
   // },

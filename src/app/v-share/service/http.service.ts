@@ -29,7 +29,7 @@ export class HTTPService {
     private translate: TranslateService
   ) { }
 
-  public Post(api: string, TrClass: any): Promise<any> {
+  public Post(api: string, TrClass: any, isAuth?: boolean): Promise<any> {
     return new Promise((resolve, reject) => {
       const aesInfo: any = Utils.getSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME) || {};
       if (aesInfo && new Date().getTime() - aesInfo > environment.autoLogoutTime) {
@@ -74,12 +74,9 @@ export class HTTPService {
           return;
         }
 
-        const httpOptionsObj = {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + access_token
-        };
 
-        const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+
+
 
         const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
         // const date = moment().format('dddd, MMMM D, YYYY hh:mm:ss');
@@ -89,15 +86,32 @@ export class HTTPService {
 
         // console.log(date);
 
-        const uri = this.url + api + '?userId=' + userInfo.id + '&lang=' + lang + '&date='+date;
+
 
         const dataBody = JSON.stringify(TrClass);
         // const encryptionData = this.cryptoService.encrypt(dataBody);
         // const requestData = {
         //   body: encryptionData.toString()
         // };
+        let uri = "";
+        let  httpOptionsObj = {};
+        if (isAuth === true) {
+          uri = api + '?lang=' + lang + '&date=202110012006:02:34';
+          httpOptionsObj = {
+            'Content-Type': 'application/json'
+          };
 
-        this.data = this.httpClient.post(uri, dataBody, {
+        } else {
+          const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+          uri =  api + '?userId=' + userInfo.id + '&lang=' + lang + '&date='+date;
+           httpOptionsObj = {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + access_token
+          };
+        }
+        console.log('httpOptionsObj', httpOptionsObj);
+
+        this.data = this.httpClient.post(uri, dataBody,  {
           headers: new HttpHeaders(httpOptionsObj)
         }).subscribe( (res:any) => {
             const newAesInfo: any = Utils.getSecureStorage(AESINFO.STORE) || {};

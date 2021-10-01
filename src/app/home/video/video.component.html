@@ -25,10 +25,22 @@
               <a href="#task_window" id="task_chat" class="task-chat profile-rightbar float-right"><i class="fa fa-comments"></i></a>
             </li>
             <li class="nav-item dropdown dropdown-action">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-cog"></i></a>
+              <div class="h3 card-title with-switch">
+                <span style="margin-right: 20px;margin-top: 5px;">Auto Play</span>
+
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch_annual"
+                        checked>
+                    <label class="onoffswitch-label" for="switch_annual">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </div>
+              <!-- <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-cog"></i></a>
               <div class="dropdown-menu dropdown-menu-right">
                 <a href="javascript:void(0)" class="dropdown-item">Settings</a>
-              </div>
+              </div> -->
             </li>
           </ul>
 
@@ -37,8 +49,18 @@
   <div class="chat-contents">
       <div class="chat-content-wrap col-md-12" style="margin-top: 15px;">
           <div class="user-video" style="position: relative;width: 90%;margin: 0 auto;">
-            <video type="video/mp4" [src]="src"  height="200" controls controlsList="nodownload" (ended)="videoEnd()"></video>
-              <!-- <img [src]="src" alt="" style="height: 400px;width: 100%;"> -->
+
+            <!-- <video loop autoplay oncanplay="this.play()" onloadedmetadata="this.muted = true" controls controlsList="nodownload">
+              <source [src]="src" type="video/mp4">
+          </video> -->
+
+
+            <!-- <video autoplay="autoplay" preload="auto" controls controlsList="nodownload" >
+              <source [src]="src" type="video/mp4">
+          </video> -->
+
+            <video type="video/mp4" [src]="src"  height="200" controls controlsList="nodownload" (ended)="videoEnd()" style="width: 100%;"></video>
+
           </div>
 
 
@@ -68,10 +90,12 @@
                                           </a>
                                       </div>
                                       <div class="user-info float-left">
-                                          <a style="padding: 0px;border-left: none;"><span>Mike Litorus</span></a>
-                                          <span class="last-seen">19-02-2021: 12:50</span>
+                                          <a style="padding: 0px;border-left: none;"><span>{{item.title}}</span></a>
+                                          <span class="last-seen">{{item.createOn}}</span>
                                       </div>
                                       <span class="part"> {{item.part}} part</span>
+                                      <span class="part" *ngIf = "item.isEnd === 'Y'"> End</span>
+
                                   </div>
                                 </div>
                               </a>
